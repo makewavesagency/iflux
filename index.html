@@ -2,10 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Redirect URI</title>
+    <title>OAuth Redirect</title>
+    <script>
+        window.onload = function() {
+            // Extract the authorization code from the URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const authCode = urlParams.get('code');
+            
+            if (authCode) {
+                // Display the authorization code or send it to your server
+                document.getElementById('auth-code').innerText = authCode;
+
+                // Optionally, you could send the code to your server here
+                // fetch('/your-server-endpoint', {
+                //     method: 'POST',
+                //     body: JSON.stringify({ code: authCode }),
+                //     headers: { 'Content-Type': 'application/json' }
+                // });
+            } else {
+                document.getElementById('auth-code').innerText = 'No authorization code found in the URL.';
+            }
+        }
+    </script>
 </head>
 <body>
-    <p>Thank you! The redirect was successful.</p>
-    <p>If needed, please return to the application.</p>
+    <p>Authorization Code: <span id="auth-code"></span></p>
 </body>
 </html>
